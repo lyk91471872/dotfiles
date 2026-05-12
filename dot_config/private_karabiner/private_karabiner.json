@@ -1,0 +1,444 @@
+{
+    "profiles": [
+        {
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "control + hyper + hjkl -> control + arrow keys",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "control + hyper + h -> control + left",
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "mandatory": "control",
+                                        "optional": "caps_lock"
+                                    }
+                                },
+                                "to": {
+                                    "key_code": "left_arrow",
+                                    "modifiers": "control"
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "control + hyper + j -> control + down",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": "control",
+                                        "optional": "caps_lock"
+                                    }
+                                },
+                                "to": {
+                                    "key_code": "down_arrow",
+                                    "modifiers": "control"
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "control + hyper + k -> control + up",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": "control",
+                                        "optional": "caps_lock"
+                                    }
+                                },
+                                "to": {
+                                    "key_code": "up_arrow",
+                                    "modifiers": "control"
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "control + hyper + l -> control + right",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": "control",
+                                        "optional": "caps_lock"
+                                    }
+                                },
+                                "to": {
+                                    "key_code": "right_arrow",
+                                    "modifiers": "control"
+                                },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Capslock to Hyper/Esc/English Input Source",
+                        "manipulators": [
+                            {
+                                "description": "capslock (press) -> esc+English; capslock (hold) -> hyper",
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": {
+                                    "set_variable": {
+                                        "name": "HYPER",
+                                        "value": 1
+                                    }
+                                },
+                                "to_after_key_up": {
+                                    "set_variable": {
+                                        "name": "HYPER",
+                                        "value": 0
+                                    }
+                                },
+                                "to_if_alone": [
+                                    { "key_code": "escape" },
+                                    { "select_input_source": { "language": "en" } }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "capslock + esc -> switch capslock state",
+                                "from": {
+                                    "modifiers": { "optional": "caps_lock" },
+                                    "simultaneous": [
+                                        { "key_code": "left_shift" },
+                                        { "key_code": "right_shift" }
+                                    ]
+                                },
+                                "to": { "key_code": "caps_lock" },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Input Language Selection",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + space -> Chinese",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": { "optional": ["caps_lock"] }
+                                },
+                                "to": [{ "select_input_source": { "language": "zh" } }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + i -> i + chinese",
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": { "optional": ["shift", "caps_lock"] }
+                                },
+                                "to": [
+                                    { "key_code": "i" },
+                                    { "select_input_source": { "language": "zh" } }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + o -> o + chinese",
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": { "optional": ["shift", "caps_lock"] }
+                                },
+                                "to": [
+                                    { "key_code": "o" },
+                                    { "select_input_source": { "language": "zh" } }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + a -> a + chinese",
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": { "optional": ["shift", "caps_lock"] }
+                                },
+                                "to": [
+                                    { "key_code": "a" },
+                                    { "select_input_source": { "language": "zh" } }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + c -> c + chinese",
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": { "optional": ["shift", "caps_lock"] }
+                                },
+                                "to": [
+                                    { "key_code": "c" },
+                                    { "select_input_source": { "language": "zh" } }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + s -> s + chinese",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": { "optional": ["shift", "caps_lock"] }
+                                },
+                                "to": [
+                                    { "key_code": "s" },
+                                    { "select_input_source": { "language": "zh" } }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + r -> r + chinese",
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": { "optional": ["shift", "caps_lock"] }
+                                },
+                                "to": [
+                                    { "key_code": "r" },
+                                    { "select_input_source": { "language": "zh" } }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "hyper + hjkl -> arrow keys",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + h -> left",
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": { "optional": "caps_lock" }
+                                },
+                                "to": { "key_code": "left_arrow" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + j -> down",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": { "optional": "caps_lock" }
+                                },
+                                "to": { "key_code": "down_arrow" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + k -> up",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": { "optional": "caps_lock" }
+                                },
+                                "to": { "key_code": "up_arrow" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "hyper + l -> right",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": { "optional": "caps_lock" }
+                                },
+                                "to": { "key_code": "right_arrow" },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "option + hyper + hjkl -> option + arrow keys",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "option + hyper + h -> option + left",
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "mandatory": "option",
+                                        "optional": "caps_lock"
+                                    }
+                                },
+                                "to": {
+                                    "key_code": "left_arrow",
+                                    "modifiers": "option"
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "option + hyper + j -> option + down",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": "option",
+                                        "optional": "caps_lock"
+                                    }
+                                },
+                                "to": {
+                                    "key_code": "down_arrow",
+                                    "modifiers": "option"
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "option + hyper + k -> option + up",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": "option",
+                                        "optional": "caps_lock"
+                                    }
+                                },
+                                "to": {
+                                    "key_code": "up_arrow",
+                                    "modifiers": "option"
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "HYPER",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "description": "option + hyper + l -> option + right",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": "option",
+                                        "optional": "caps_lock"
+                                    }
+                                },
+                                "to": {
+                                    "key_code": "right_arrow",
+                                    "modifiers": "option"
+                                },
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+        }
+    ]
+}

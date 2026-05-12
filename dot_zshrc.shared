@@ -1,0 +1,36 @@
+export EDITOR=vim
+
+alias vr='vim ~/.vimrc'
+alias zr='vim ~/.zshrc'
+alias zrs='vim ~/.zshrc.shared'
+alias szr='source ~/.zshrc'
+
+# zsh-vi-mode:
+# Y copies visual selection/current line to the macOS clipboard
+# Requires macOS pbcopy and Homebrew-installed zsh-vi-mode
+if command -v brew >/dev/null 2>&1; then
+  ZVM_PATH="$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+
+  [[ -f "$ZVM_PATH" ]] && source "$ZVM_PATH"
+fi
+
+if command -v pbcopy >/dev/null 2>&1 && (( $+functions[zvm_bindkey] )); then
+  function _zvm_yank_to_clipboard() {
+    local beg=$MARK end=$CURSOR
+    (( beg > end )) && { local t=$beg; beg=$end; end=$t }
+    echo -n "${BUFFER:$beg:$((end - beg + 1))}" | pbcopy
+    zvm_exit_visual_mode
+  }
+  zle -N _zvm_yank_to_clipboard
+
+  function _zvm_yank_line_to_clipboard() {
+    echo -n "$BUFFER" | pbcopy
+    zle -M "Line yanked to clipboard"
+  }
+  zle -N _zvm_yank_line_to_clipboard
+
+  function zvm_after_init() {
+    zvm_bindkey visual 'Y' _zvm_yank_to_clipboard
+    zvm_bindkey vicmd 'Y' _zvm_yank_line_to_clipboard
+  }
+fi

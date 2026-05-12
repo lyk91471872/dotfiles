@@ -1,0 +1,65 @@
+set ts=4 sts=4 sw=4 et nu rnu is
+%retab!
+filetype indent on
+syntax on
+
+set smarttab
+set encoding=UTF-8
+set nocompatible
+set cursorline
+set cursorcolumn
+set ruler
+set re=0
+
+" Highlight "
+highlight Visual ctermfg=black ctermbg=white
+highlight SpellBad cterm=underline ctermfg=white ctermbg=yellow
+highlight Statement ctermfg=white
+highlight StatusLineTerm ctermfg=black ctermbg=white
+highlight StatusLineTermNC ctermfg=black ctermbg=white
+highlight Search ctermfg=black ctermbg=white
+highlight LineNr ctermfg=magenta
+highlight CursorLine cterm=none ctermbg=black
+highlight CursorLineNr cterm=none ctermfg=black ctermbg=white
+highlight CursorColumn ctermbg=yellow
+
+" remove trailing whitespaces when opening a file
+autocmd BufReadPost * silent! %s/\s\+$//e
+
+func! CompileLilypond()
+    silent exec '!mkdir -p pdf midi wav'
+    silent exec '!lilypond % && mv %<.pdf pdf/%<.pdf && mv %<.midi midi/%<.midi'
+endfunc
+
+nmap <S-r> :call CompileRun()<CR>
+func! CompileRun()
+    exec 'w'
+    if &filetype == 'java'
+        exec '!javac % && time java %<'
+    elseif &filetype == 'sh'
+        :!time bash %
+    elseif &filetype == 'python'
+        exec '!time python %'
+    elseif &filetype == 'rust'
+        exec '!cargo clippy && rustc % && time ./%<'
+    elseif &filetype == 'go'
+        exec '!time go run %'
+    elseif &filetype == 'lilypond'
+        silent exec 'call CompileLilypond()'
+        silent exec '!open pdf/%<.pdf'
+        silent exec 'redraw!'
+    elseif &filetype == 'tex'
+        silent exec '!xelatex --halt-on-error % && open %<.pdf'
+        silent exec 'redraw!'
+    elseif &filetype == 'markdown'
+        silent exec '!rm %<.pdf'
+        silent exec '!pandoc % -o %<.pdf --pdf-engine=xelatex && open %<.pdf'
+        silent exec 'redraw!'
+    endif
+endfunc
+
+nnoremap <Leader>a ggVG
+vnoremap <Leader>c "+y
+nnoremap <Leader>c 0"+yg_
+vnoremap <Leader>x "+d
+nnoremap <Leader>x 0"+dg_

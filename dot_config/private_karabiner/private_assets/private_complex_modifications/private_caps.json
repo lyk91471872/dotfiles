@@ -1,0 +1,398 @@
+{
+  "title": "Caps2HyperEsc",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "description": "Capslock to Hyper/Esc/English Input Source",
+      "manipulators": [
+        {
+          "description": "capslock (press) -> esc+English; capslock (hold) -> hyper",
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": { "optional": "any" }
+          },
+          "to": {
+            "set_variable": {
+              "name": "HYPER",
+              "value": 1
+            }
+          },
+          "to_after_key_up": {
+            "set_variable": {
+              "name": "HYPER",
+              "value": 0
+            }
+          },
+          "to_if_alone": [
+            {
+              "key_code": "escape"
+            },
+            {
+              "select_input_source": { "language": "en" }
+            }
+          ]
+        },
+        {
+          "description": "capslock + esc -> switch capslock state",
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              { "key_code": "left_shift" },
+              { "key_code": "right_shift" }
+            ],
+            "modifiers": { "optional": "caps_lock" }
+          },
+          "to": { "key_code": "caps_lock" }
+        }
+      ]
+    },
+    {
+      "description": "Input Language Selection",
+      "manipulators": [
+        {
+          "description": "hyper + space -> Chinese",
+          "type": "basic",
+          "conditions": [{
+              "name": "HYPER",
+              "type": "variable_if",
+              "value": 1
+          }],
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": {
+              "optional": "caps_lock"
+            }
+          },
+          "to": {
+            "select_input_source": {
+              "language": "zh"
+            }
+          }
+        },
+        {
+          "description": "hyper + i -> i + chinese",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "optional": [
+                "shift",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "i"
+            },
+            {
+              "select_input_source": {
+                "language": "zh"
+              }
+            }
+          ]
+        },
+        {
+          "description": "hyper + o -> o + chinese",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "optional": [
+                "shift",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "o"
+            },
+            {
+              "select_input_source": {
+                "language": "zh"
+              }
+            }
+          ]
+        },
+        {
+          "description": "hyper + a -> a + chinese",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "a",
+            "modifiers": {
+              "optional": [
+                "shift",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "a"
+            },
+            {
+              "select_input_source": {
+                "language": "zh"
+              }
+            }
+          ]
+        },
+        {
+          "description": "hyper + c -> c + chinese",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "optional": [
+                "shift",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "c"
+            },
+            {
+              "select_input_source": {
+                "language": "zh"
+              }
+            }
+          ]
+        },
+        {
+          "description": "hyper + s -> s + chinese",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "optional": [
+                "shift",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "s"
+            },
+            {
+              "select_input_source": {
+                "language": "zh"
+              }
+            }
+          ]
+        },
+        {
+          "description": "hyper + r -> r + chinese",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "r",
+            "modifiers": {
+              "optional": [
+                "shift",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "r"
+            },
+            {
+              "select_input_source": {
+                "language": "zh"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "hyper + hjkl -> arrow keys",
+      "manipulators": [
+        {
+          "description": "hyper + h -> left",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "optional": "caps_lock"
+            }
+          },
+          "to": {"key_code": "left_arrow"}
+        },
+        {
+          "description": "hyper + j -> down",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "optional": "caps_lock"
+            }
+          },
+          "to": {"key_code": "down_arrow"}
+        },
+        {
+          "description": "hyper + k -> up",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "optional": "caps_lock"
+            }
+          },
+          "to": {"key_code": "up_arrow"}
+        },
+        {
+          "description": "hyper + l -> right",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "optional": "caps_lock"
+            }
+          },
+          "to": {"key_code": "right_arrow"}
+        }
+      ]
+    },
+    {
+      "description": "option + hyper + hjkl -> option + arrow keys",
+      "manipulators": [
+        {
+          "description": "option + hyper + h -> option + left",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "optional": "caps_lock",
+              "mandatory": "option"
+            }
+          },
+          "to": {
+            "key_code": "left_arrow",
+            "modifiers": "option"
+          }
+        },
+        {
+          "description": "option + hyper + j -> option + down",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "optional": "caps_lock",
+              "mandatory": "option"
+            }
+          },
+          "to": {
+            "key_code": "down_arrow",
+            "modifiers": "option"
+          }
+        },
+        {
+          "description": "option + hyper + k -> option + up",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "optional": "caps_lock",
+              "mandatory": "option"
+            }
+          },
+          "to": {
+            "key_code": "up_arrow",
+            "modifiers": "option"
+          }
+        },
+        {
+          "description": "option + hyper + l -> option + right",
+          "type": "basic",
+          "conditions": [{
+            "name": "HYPER",
+            "type": "variable_if",
+            "value": 1
+          }],
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "optional": "caps_lock",
+              "mandatory": "option"
+            }
+          },
+          "to": {
+            "key_code": "right_arrow",
+            "modifiers": "option"
+          }
+        }
+      ]
+    }
+  ]
+}
