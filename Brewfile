@@ -10,3 +10,4 @@ brew "zsh-vi-mode"
 
 cask "iina"
 cask "karabiner-elements"
+cask "font-space-mono"
