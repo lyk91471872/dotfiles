@@ -1,0 +1,12 @@
+brew "chezmoi"
+brew "ffmpeg"
+brew "fzf"
+brew "gh"
+brew "mpv"
+brew "node"
+brew "p7zip"
+brew "wget"
+brew "zsh-vi-mode"
+
+cask "iina"
+cask "karabiner-elements"
