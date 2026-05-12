@@ -1,3 +1,6 @@
+# Add the following line to ~/.zshrc on each machine to load shared config:
+# [[ -f ~/.zshrc.shared ]] && source ~/.zshrc.shared
+
 export EDITOR=vim
 
 alias vr='vim ~/.vimrc'
